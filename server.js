@@ -21,12 +21,10 @@ const blogRouter = require('./routes/blogs');
 const Blog = require('./models/Blog');
 const app = express();
 //connect to mongoose
-mongoose.connect('mongodb://localhost:27017/users', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: false,
-})
+const db = 'mongodb+srv://admin:admin@cluster0.siqxe.mongodb.net/users?retryWrites=true&w=majority';
+
+mongoose.connect(db, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true,
+  useFindAndModify: false,})
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err));
 
