@@ -21,12 +21,8 @@ const blogRouter = require('./routes/blogs');
 const Blog = require('./models/Blog');
 const app = express();
 //connect to mongoose
-mongoose.connect('mongodb://localhost:27017/users', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: false,
-})
+mongoose.connect(db, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true,
+  useFindAndModify: false,})
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err));
 
