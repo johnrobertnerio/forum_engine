@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>A Forum Blog</title>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm bg-light navbar-dark">
+        <a class="navbar-brand">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/59/Forum_logo.png" alt="logo" style="width:40px;">
+        </a>
+         
+       <ul class="nav nav-tabs " style="font-family: Arial Black " >
+         
+      
+      <h1 class="mt-0" style="margin-right: 100px; border:2px solid DodgerBlue; color: lightseagreen;">Welcome!</h1>
+          <li class="nav-item">
+            <h1 class="text-black">Forum Comparison | Open Forum</h1>
+          </li>
+          <li class="nav-item">
+             <a href="/users/logout" class="btn btn-danger" style="margin-left: 100px;">Logout</a> 
+            </li>
+        
+        </ul>
+        
+      </nav>
+    
+    <div class="container">
+        <div class="m-4 text-center">
+            
+            <p class="text-white">Compare Them All Within One Week</p>
+            <p class="text-white" style="font-size: x-small;">After One Week It Be Deleted And Replaced</p>
+
+           
+
+        </div>
+        <div class="row mb-3">
+            <a href="blogs/new" class="btn btn-success d-flex align-items-center"><i
+                    class="material-icons mr-2">add_circle</i>
+                New Topic</a>
+        </div>
+
+        <div class="row">
+
+            <% if(blogs.length<1){%>
+
+            <p class="text-white">No posts yet, create a new one</p>
+
+            <%  } %>
+
+
+            <% blogs.forEach(blog=>{ %>
+
+
+            <div class="col-lg-6 card mt-2 mr-0">
+                <div class="row p-2">
+
+                    <div class="col-5 overflow-hidden">
+                        <img src="/uploads/images/<%= blog.img %>" class="card-img" alt="...">
+
+                    </div>
+
+                    <div class="col-7">
+                        <div class="d-flex align-items-start">
+                            <h5 class="w-100"><b> <%= blog.title %> </b></h5>
+
+                            <!-- display more button -->
+                            <div class="more position-relative" style="cursor: pointer;">
+
+
+                                <i class="material-icons p-2">more_vert</i>
+                                <!-- options list -->
+                                <div class="d-none options card rounded-pill shadow-sm p-1 position-absolute">
+                                    <a href="blogs/edit/<%= blog.id %> " class="rounded-circle p-2 mb-2"
+                                        style="background:blue;">
+                                        <i class="material-icons" style="color:white">create</i>
+                                    </a>
+                                    <form action="/blogs/<%=blog.id%>?_method=DELETE" method="POST">
+                                        <button class="rounded-circle p-2 bg-danger">
+                                            <i class="material-icons" style="color:white">delete</i>
+
+                                        </button>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <span class="align-self-stretch "><%= blog.snippet %>
+
+                        </span>
+                        <div class="d-flex align-items-end">
+                            <div class="mr-2">
+                                <img src="/uploads/images/<%= blog.img %>" class="rounded-circle"
+                                    style="width: 40px; height: 40px;">
+                            </div>
+                            <div class=" flex-grow-1">
+                                <h5 class="" style="font-size: 14px; line-height: 0.5rem;">
+                                    <span><b><%= blog.author%></b></span></h5>
+                                <p style="font-size: 8px; line-height: 0.2rem;">
+                                    <%= blog.timeCreated.toLocaleDateString() %></p>
+                            </div>
+                            <a href="blogs/<%=blog.slug %> " class=" align-self-end">
+                                <i class='material-icons ml-3 text-black'>send</i>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <% }) %>
+
+            <div class="container-fluid" style="position: relative; border-radius: 5px; background-color: #f2f2f2; padding: 20px 0 30px 0">
+
+            
+                <% if(employees.length<1){%>
+                        <%  } %>
+                        <% employees.forEach(employee=>{ %>
+                 <div class="container" style="background-color: white" >
+                    
+                    
+                  
+                        <h6><%= employee.username %>: <label ><%= employee.comment %></label>   </h6>
+                        
+                        
+                   
+                </div>
+                 <%})%>
+                <div class="container" style="background-color: rgba(99, 253, 222, 0.3)">
+              <form class="container" action="/index/store" method="POST">
+                <input type="text" class="form-control" name="username" placeholder="Enter username" >
+              <input type="text" class="form-control" name="comment" placeholder="Comment here">
+              <button type="submit" class="btn btn-outline-primary">Submit</button>
+                </div>
+               </form>
+           
+              </div>
+
+
+        </div>
+        <script src="/js/index.js"></script>
+
+</body>
+
+
+</html>
