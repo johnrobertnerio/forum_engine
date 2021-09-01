@@ -15,8 +15,6 @@ const methodOverride = require('method-override');
 
 // Passport Config
 require('./config/passport')(passport);
-const employeeRouter = require('./routes/employees');
-const Employee = require('./models/Employee');
 const blogRouter = require('./routes/blogs');
 const Blog = require('./models/Blog');
 const app = express();
@@ -25,7 +23,7 @@ const db = 'mongodb+srv://admin:admin@cluster0.siqxe.mongodb.net/users?retryWrit
 
 mongoose.connect(db, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true,
   useFindAndModify: false,})
-  .then(() => console.log('MongoDB Connected'))
+  .then(() => console.log('MongoDB Conneced'))
   .catch(err => console.log(err));
 
 //set template engine
@@ -37,9 +35,9 @@ app.use(methodOverride('_method'));
 //route for the index
 app.get('/index', async (request, response) => {
   let blogs = await Blog.find().sort({ timeCreated: 'desc' });
-  let employees = await Employee.find().sort({ timeCreated: 'desc' });
+  
 
-  response.render('index', { blogs: blogs, employees: employees });
+  response.render('index', { blogs: blogs });
 
 });
 
@@ -78,7 +76,7 @@ app.use('/uploads', express.static('uploads'))
 
 app.use(express.static('public'));
 app.use('/blogs', blogRouter);
-app.use('/index', employeeRouter);
+
 
 
 //listen port

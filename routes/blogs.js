@@ -47,9 +47,12 @@ router.post('/', upload.single('image'), async (request, response) => {
   console.log(request.file);
   // console.log(request.body);
   let blog = new Blog({
-    title: request.body.title,
-    author: request.body.author,
-    description: request.body.description,
+    fname: request.body.fname,
+    lname: request.body.lname,
+    address: request.body.address,
+    contact: request.body.contact,
+    reason: request.body.reason,
+    confirm: request.body.confirm,
     img: request.file.filename,
   });
 
@@ -72,9 +75,12 @@ router.get('/edit/:id', async (request, response) => {
 router.put('/:id', async (request, response) => {
   request.blog = await Blog.findById(request.params.id);
   let blog = request.blog;
-  blog.title = request.body.title;
-  blog.author = request.body.author;
-  blog.description = request.body.description;
+  blog.fname = request.body.fname;
+  blog.lname = request.body.lname;
+  blog.address = request.body.address;
+  blog.contact = request.body.contact;
+  blog.reason = request.body.reason;
+  blog.confirm = request.body.confirm;
 
   try {
     blog = await blog.save();

@@ -10,7 +10,7 @@
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <title> <%= blog.title %> </title>
+    <title> <%= blog.fname %> </title>
 </head>
 
 <body>
@@ -25,9 +25,6 @@
                         </i> <span class="" style="color:black">Back</span>
                     </a>
                 </div>
-                <div class="col-8">
-                    <h1> <%= blog.title %> </h1>
-                </div>
                 
             </div>
 
@@ -40,17 +37,26 @@
             <div class="d-flex align-items-end mt-3">
                 <div class="mr-2">
                     <img src="/uploads/images/<%= blog.img %>" class="rounded-circle"
-                        style="width: 60px; height: 60px;">
+                        style="width: 100px; height: 100px;">
                 </div>
                 <div class=" flex-grow-1">
-                    <h5 class="" style="font-size: 16px; line-height: 0.5rem;">
-                        <span><b> <%= blog.author %></b></span></h5>
-                    <p style="font-size: 12px; line-height: 0.2rem;">
-                        <%= blog.timeCreated.toLocaleDateString() %> %></p>
+                    <p style="font-size: 16px; line-height: 0.3rem;">
+                        Full Name:<b> <%= blog.fname %> <%= blog.lname %></b> </p>
+                    <p style="font-size: 16px; line-height: 0.3rem;">
+                        Address:<b> <%- blog.address %></b> </p>
+                    <p style="font-size: 16px; line-height: 0.1rem;">
+                        Contact:<b> <%- blog.contact %></b> </p>
+                    <p style="font-size: 16px; line-height: 0.1rem;">
+                        Purpose/Reason:<b> <%- blog.reason %></b> </p>
+                    <p style="font-size: 16px; line-height: 0.1rem;">
+                        Time-In:<b> <%- blog.createdAt %></b> </p>    
+                    <p style="font-size: 16px; line-height: 0.1rem;">
+                        Time-Out:<b> <%- blog.updatedAt %></b> </p>
+                         
                 </div>
 
             </div>
-            <p class="card-text"> <%- blog.description %>
+            
         </div>
         
 

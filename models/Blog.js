@@ -9,21 +9,28 @@ const stripHtml = require('string-strip-html');
 //initialize slug
 mongoose.plugin(slug);
 const blogSchema = new mongoose.Schema({
-  title: {
+  fname: {
     type: String,
     required: true,
   },
-  author: {
+  lname: {
     type: String,
     required: true,
   },
-  description: {
+  address: {
     type: String,
   },
-  timeCreated: {
-    type: Date,
-    default: () => Date.now(),
+  contact: {
+    type: String,
   },
+  reason: {
+    type: String,
+  },
+  confirm: {
+    type: String,
+  },
+  
+  
   snippet: {
     type: String,
   },
@@ -31,17 +38,9 @@ const blogSchema = new mongoose.Schema({
     type: String,
     default: 'placeholder.jpg',
   },
-  slug: { type: String, slug: 'title', unique: true, slug_padding_size: 2 },
-});
-
-blogSchema.pre('validate', function (next) {
-  //check if there is a description
-  if (this.description) {
-    this.description = htmlPurify.sanitize(this.description);
-    this.snippet = stripHtml(this.description.substring(0, 200)).result;
-  }
-
-  next();
-});
+  slug: { type: String, slug: 'fname', unique: true, slug_padding_size: 2 },
+   
+},
+{timestamps: true});
 
 module.exports = mongoose.model('Blog', blogSchema);
